@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('shared/head.ejs') %>
+
+    <body>
+        <%- include('shared/nav.ejs') %>
+
+            <div class="blogs content">
+                <h1>All blogs</h1>
+                <% if(datas.length> 0){%>
+
+
+
+                    <% datas.forEach(data=> {%>
+                        <div class="blogs">
+                            <a class="_link" href="/blogs/<%= data._id%>">
+
+                                <h2 class="title">
+                                    <%= data.title%>
+                                </h2>
+                                <p class="snippet">
+                                    <%= data.body%>
+                                </p>
+                            </a>
+                        </div>
+                        <%})%>
+
+                            <% }else{%>
+                                <h2>There's no blog to show</h2>
+                                <%}%>
+
+            </div>
+            <%- include('shared/footer.ejs') %>
+    </body>
+
+</html>

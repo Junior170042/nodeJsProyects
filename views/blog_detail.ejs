@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('shared/head.ejs') %>
+
+    <body>
+        <%- include('shared/nav.ejs') %>
+
+            <div class="blogs content">
+                <h1>Blog Detail</h1>
+
+                <div class="blogs">
+                    <h2 class="title">
+                        <%= datas.title%>
+                    </h2>
+                    <p class="snippet">
+                        <%= datas.body%>
+                    </p>
+                    <a class="delete" data-doc="<%= datas._id%>"><img src="../trash.svg" alt="deletIcon"></a>
+                </div>
+
+            </div>
+            <%- include('shared/footer.ejs') %>
+
+                <script>
+                    const del = document.querySelector('a.delete');
+                    del.addEventListener('click', () => {
+                        const _point = `/blogs/${del.dataset.doc}`;
+
+                        fetch(_point, {
+                            method: 'DELETE'
+                        })
+                            .then((response) => response.json())
+                            //get the response and redirect to the specified url
+                            .then(data => window.location.href = data.redirect)
+                            .catch(err => console.log(err))
+                    })
+                </script>
+    </body>
+
+</html>
